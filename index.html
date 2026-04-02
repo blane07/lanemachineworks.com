@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Lane Machine Works | Precision CNC Machining</title>
+    <meta name="description"
+        content="Lane Machine Works delivers precision CNC machining for 6061 aluminum parts with stable pricing, repeatable process control, and predictable delivery.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #f3f1eb;
+            --bg-strong: #e8e3d8;
+            --surface: rgba(255, 255, 255, 0.78);
+            --surface-strong: #ffffff;
+            --surface-dark: #131313;
+            --text: #111111;
+            --muted: #5b5b57;
+            --line: rgba(17, 17, 17, 0.12);
+            --accent: #8c6a3a;
+            --accent-soft: rgba(140, 106, 58, 0.12);
+            --shadow: 0 24px 70px rgba(17, 17, 17, 0.08);
+            --radius-lg: 28px;
+            --radius-md: 20px;
+            --radius-sm: 14px;
+            --max-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Instrument Sans", "Segoe UI", sans-serif;
+            -webkit-text-size-adjust: 100%;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(140, 106, 58, 0.14), transparent 32%),
+                radial-gradient(circle at top right, rgba(17, 17, 17, 0.08), transparent 26%),
+                linear-gradient(180deg, #faf8f3 0%, var(--bg) 40%, #eeebe2 100%);
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:focus-visible,
+        summary:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .page-shell {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-shell::before,
+        .page-shell::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(12px);
+            pointer-events: none;
+        }
+
+        .page-shell::before {
+            top: 7rem;
+            left: -6rem;
+            width: 18rem;
+            height: 18rem;
+            background: rgba(140, 106, 58, 0.08);
+        }
+
+        .page-shell::after {
+            right: -5rem;
+            top: 34rem;
+            width: 15rem;
+            height: 15rem;
+            background: rgba(17, 17, 17, 0.06);
+        }
+
+        .container {
+            width: min(calc(100% - 2rem), var(--max-width));
+            margin: 0 auto;
+        }
+
+        section[id] {
+            scroll-margin-top: 7rem;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(16px);
+            background: rgba(243, 241, 235, 0.75);
+            border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 84px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.9rem;
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 168px;
+            background: rgba(255, 255, 255, 0.86);
+            border-radius: 999px;
+            padding: 0.7rem 1rem;
+            box-shadow: 0 12px 30px rgba(17, 17, 17, 0.06);
+        }
+
+        .brand-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .eyebrow,
+        .kicker {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.74rem;
+            color: var(--accent);
+        }
+
+        .brand-copy strong {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            white-space: nowrap;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.25rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            color: #ffffff;
+            background: var(--surface-dark);
+            box-shadow: 0 14px 28px rgba(17, 17, 17, 0.18);
+        }
+
+        .button-secondary {
+            border-color: var(--line);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .hero {
+            padding: 4.5rem 0 2.5rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .hero-copy {
+            padding: 1.2rem 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            color: var(--text);
+        }
+
+        h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.6rem, 8vw, 5.4rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            max-width: 11ch;
+            margin-top: 0.9rem;
+            text-wrap: balance;
+        }
+
+        .hero-copy p {
+            max-width: 58ch;
+            font-size: 1.08rem;
+            margin: 1.5rem 0 0;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        .hero-points {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        .metric {
+            padding: 1rem 1.1rem;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(17, 17, 17, 0.08);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(12px);
+        }
+
+        .metric strong {
+            display: block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-panel,
+        .card,
+        .quote-panel,
+        .faq-item,
+        .split-card {
+            border: 1px solid rgba(17, 17, 17, 0.08);
+            background: var(--surface);
+            backdrop-filter: blur(18px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100%;
+        }
+
+        .logo-card {
+            background: var(--surface-strong);
+            padding: 1.2rem;
+            border-radius: 22px;
+            border: 1px solid rgba(17, 17, 17, 0.06);
+        }
+
+        .panel-stack {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.1rem;
+        }
+
+        .panel-note {
+            padding: 1rem 1.1rem;
+            background: linear-gradient(180deg, rgba(140, 106, 58, 0.12), rgba(255, 255, 255, 0.75));
+            border-radius: 20px;
+        }
+
+        .section {
+            padding: 2.5rem 0;
+        }
+
+        .section-heading {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            max-width: 52rem;
+        }
+
+        .section-heading h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.04em;
+            text-wrap: balance;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            padding: 1.5rem;
+        }
+
+        .card h3,
+        .split-card h3,
+        .faq-item summary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .label {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .process-step {
+            padding: 1.6rem;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(232, 227, 216, 0.6));
+            border: 1px solid rgba(17, 17, 17, 0.08);
+        }
+
+        .step-number {
+            display: inline-flex;
+            width: 2.4rem;
+            height: 2.4rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: var(--surface-dark);
+            color: #ffffff;
+            font-family: "Space Grotesk", sans-serif;
+            margin-bottom: 1.1rem;
+        }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .split-card {
+            padding: 1.5rem;
+        }
+
+        .split-card ul {
+            margin-top: 1rem;
+        }
+
+        .split-card.good {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(140, 106, 58, 0.08));
+        }
+
+        .split-card.bad {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(17, 17, 17, 0.04));
+        }
+
+        .quote-panel {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+
+        .quote-panel .button {
+            margin-top: 1rem;
+        }
+
+        .quote-checklist {
+            padding: 1.4rem;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(17, 17, 17, 0.06);
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .faq-item {
+            padding: 0.25rem 1.15rem;
+        }
+
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1rem 0;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item p {
+            margin: 0 0 1rem;
+        }
+
+        footer {
+            padding: 2rem 0 3rem;
+        }
+
+        .footer-badge {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-badge-card {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.25rem;
+            border-radius: 22px;
+            border: 1px solid rgba(17, 17, 17, 0.08);
+            background: rgba(255, 255, 255, 0.78);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+        }
+
+        .footer-badge-card img {
+            width: min(240px, 100%);
+            height: auto;
+        }
+
+        .footer-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(17, 17, 17, 0.1);
+        }
+
+        .footer-bar p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        @supports (padding: max(0px)) {
+            .topbar {
+                padding-top: env(safe-area-inset-top);
+            }
+
+            .container {
+                width: min(calc(100% - max(1rem, env(safe-area-inset-left)) - max(1rem, env(safe-area-inset-right))),
+                        var(--max-width));
+            }
+
+            footer {
+                padding-bottom: max(3rem, env(safe-area-inset-bottom));
+            }
+        }
+
+        @media (max-width: 980px) {
+            .nav {
+                flex-wrap: wrap;
+                padding: 0.8rem 0;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .hero-grid,
+            .cards,
+            .process-grid,
+            .split-grid,
+            .quote-panel,
+            .hero-points {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                max-width: 12ch;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .topbar {
+                position: static;
+            }
+
+            .container {
+                width: min(calc(100% - 1.25rem), var(--max-width));
+            }
+
+            .brand {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-mark {
+                width: min(100%, 180px);
+            }
+
+            .nav-links {
+                width: calc(100% + 0.1rem);
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                gap: 0.7rem;
+                font-size: 0.9rem;
+                overflow-x: auto;
+                padding: 0.15rem 0 0.35rem;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-links::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-links a {
+                flex: 0 0 auto;
+                padding: 0.72rem 0.95rem;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.72);
+                border: 1px solid rgba(17, 17, 17, 0.08);
+            }
+
+            .nav-links .button-primary {
+                box-shadow: none;
+            }
+
+            .hero {
+                padding-top: 2.25rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-copy p,
+            .section-heading p,
+            .quote-panel p,
+            p,
+            li {
+                font-size: 0.98rem;
+            }
+
+            .hero-panel,
+            .card,
+            .split-card,
+            .process-step,
+            .quote-panel,
+            .quote-checklist {
+                padding: 1.2rem;
+            }
+
+            .metric {
+                padding: 0.95rem 1rem;
+            }
+
+            .footer-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-badge {
+                justify-content: flex-start;
+            }
+
+            .footer-badge-card {
+                width: 100%;
+                max-width: 260px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <div class="container nav">
+                <a class="brand" href="#top" aria-label="Lane Machine Works home">
+                    <div class="brand-mark">
+                        <img src="img/logo.png" alt="Lane Machine Works logo">
+                    </div>
+                    <div class="brand-copy">
+                        <span class="eyebrow">Precision CNC Machining</span>
+                        <strong>Lane Machine Works</strong>
+                    </div>
+                </a>
+
+                <nav class="nav-links" aria-label="Primary navigation">
+                    <a href="#capabilities">Capabilities</a>
+                    <a href="#process">Process</a>
+                    <a href="#fit">Is It a Fit?</a>
+                    <a href="#faq">FAQ</a>
+                    <a class="button button-primary" href="#quote">Request a Quote</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="top">
+            <section class="hero">
+                <div class="container hero-grid">
+                    <div class="hero-copy">
+                        <span class="kicker">Focused Manufacturing</span>
+                        <h1>Predictable machining for repeatable aluminum parts.</h1>
+                        <p>
+                            Lane Machine Works is built around a narrow operating model: 6061-T6 aluminum components,
+                            small batch production, repeat-friendly part geometries, and a process tuned for reliable
+                            delivery instead of constant fire drills.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a class="button button-primary"
+                                href="mailto:brendan@lanemachineworks.com?subject=Quote%20Request%20for%20Lane%20Machine%20Works">Email Drawings</a>
+                            <a class="button button-secondary" href="#capabilities">See Capabilities</a>
+                        </div>
+
+                        <div class="hero-points" aria-label="Key operating metrics">
+                            <div class="metric">
+                                <strong>6061</strong>
+                                <span class="muted">Material focus for tighter process control.</span>
+                            </div>
+                            <div class="metric">
+                                <strong>&plusmn;0.005"</strong>
+                                <span class="muted">Default tolerances for efficient quoting and production.</span>
+                            </div>
+                            <div class="metric">
+                                <strong>Repeat Work</strong>
+                                <span class="muted">Revisions and recurring orders get faster, not harder.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="hero-panel" aria-label="Lane Machine Works operating model">
+                        <div>
+                            <div class="logo-card">
+                                <img src="img/logo.png" alt="Lane Machine Works branding">
+                            </div>
+
+                            <div class="panel-stack">
+                                <div class="panel-note">
+                                    <span class="label">Operating Model</span>
+                                    <p>
+                                        Most shops optimize for maximum flexibility. That usually means inconsistent
+                                        setups, shifting lead times, and pricing that resets every time a drawing
+                                        changes.
+                                    </p>
+                                </div>
+
+                                <div class="panel-note">
+                                    <span class="label">Our Approach</span>
+                                    <p>
+                                        We narrow the work on purpose, standardize how it runs, and keep fixtures,
+                                        tooling, CAM, and process knowledge attached to the job so repeat orders stay
+                                        stable.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="section" id="capabilities">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="kicker">Capabilities</span>
+                        <h2>Built for the parts that benefit from consistency.</h2>
+                        <p>
+                            We do not try to be the answer for every machining problem. The value here is a focused,
+                            repeatable process that removes surprises from quoting, setup, and delivery.
+                        </p>
+                    </div>
+
+                    <div class="cards">
+                        <article class="card">
+                            <span class="label">Part Type</span>
+                            <h3>Vise-friendly components</h3>
+                            <p>
+                                Best fit for 1-2 setup parts with practical workholding, clear datums, and geometry
+                                that rewards standard process control.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <span class="label">Production</span>
+                            <h3>Small batch machining</h3>
+                            <p>
+                                Ideal for repeatable batches where lead time, stable pricing, and revision handling
+                                matter as much as the first order.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <span class="label">Revision Flow</span>
+                            <h3>ECO-friendly repeat work</h3>
+                            <p>
+                                Fixtures, CAM, and process history stay attached to the job so engineering changes do
+                                not automatically reset effort or schedule.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="process">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="kicker">Process</span>
+                        <h2>A simple workflow designed to stay simple.</h2>
+                        <p>
+                            The goal is to reduce variability early, preserve what we learn, and make each repeat order
+                            easier to execute than the last.
+                        </p>
+                    </div>
+
+                    <div class="process-grid">
+                        <article class="process-step">
+                            <div class="step-number">01</div>
+                            <h3>Quote for fit</h3>
+                            <p>
+                                We review drawings, quantities, critical features, and whether the work matches the
+                                model before we commit.
+                            </p>
+                        </article>
+
+                        <article class="process-step">
+                            <div class="step-number">02</div>
+                            <h3>Standardize the job</h3>
+                            <p>
+                                Tooling, workholding, CAM, and inspection logic are organized for repeatability instead
+                                of improvisation.
+                            </p>
+                        </article>
+
+                        <article class="process-step">
+                            <div class="step-number">03</div>
+                            <h3>Preserve revision history</h3>
+                            <p>
+                                When the design changes, the process does not start from zero. That keeps repeat orders
+                                faster and pricing more stable over time.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="fit">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="kicker">Fit Check</span>
+                        <h2>The fastest way to move is knowing what fits.</h2>
+                        <p>
+                            Saying no early is part of the service. It protects delivery on the jobs that belong here.
+                        </p>
+                    </div>
+
+                    <div class="split-grid">
+                        <article class="split-card good">
+                            <span class="label">Good Fit</span>
+                            <h3>Projects we are built to support</h3>
+                            <ul>
+                                <li>6061-T6 aluminum components</li>
+                                <li>Small batch production and repeat orders</li>
+                                <li>Parts with practical 1-2 setup strategies</li>
+                                <li>Programs where stable pricing matters across revisions</li>
+                            </ul>
+                        </article>
+
+                        <article class="split-card bad">
+                            <span class="label">Not Ideal</span>
+                            <h3>Work that usually belongs elsewhere</h3>
+                            <ul>
+                                <li>Highly variable one-off jobs with no repeat potential</li>
+                                <li>Parts that require broad material flexibility</li>
+                                <li>Complex setups that break the standardized workflow</li>
+                                <li>Projects where every order is effectively a new job</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="kicker">Why It Matters</span>
+                        <h2>Reliable delivery starts with limits, not promises.</h2>
+                        <p>
+                            Most machine shops say yes to everything and absorb the chaos later. Lane Machine Works
+                            narrows scope to protect schedule, cost, and repeatability for the customers who fit the
+                            process.
+                        </p>
+                    </div>
+
+                    <div class="cards">
+                        <article class="card">
+                            <span class="label">Lead Time</span>
+                            <h3>More predictable schedules</h3>
+                            <p>
+                                Focused process control removes the hidden variability that makes ordinary machine shop
+                                lead times drift.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <span class="label">Pricing</span>
+                            <h3>Less reset between revisions</h3>
+                            <p>
+                                Engineering changes are treated as part of the lifecycle, not a reason to rebuild the
+                                job from scratch.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <span class="label">Repeat Orders</span>
+                            <h3>Faster on every cycle</h3>
+                            <p>
+                                Once the process is proven, programming and setup friction shrink while consistency
+                                improves.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="faq">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="kicker">FAQ</span>
+                        <h2>Quick answers before you send a drawing package.</h2>
+                    </div>
+
+                    <div class="faq-list">
+                        <details class="faq-item">
+                            <summary>What should I include in a quote request?</summary>
+                            <p>
+                                Send the drawing or model, quantity, material callout if it differs from 6061, and any
+                                critical features or inspection requirements that affect the process.
+                            </p>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Do revisions reset pricing and lead time?</summary>
+                            <p>
+                                Not automatically. Revision-friendly process control is part of the operating model, so
+                                existing fixtures, CAM, and job knowledge can often carry forward.
+                            </p>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Do you handle broad general job shop work?</summary>
+                            <p>
+                                No. The shop is intentionally narrow. That constraint is what makes schedule and repeat
+                                work more dependable for the jobs that fit.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="quote">
+                <div class="container">
+                    <div class="quote-panel">
+                        <div>
+                            <span class="kicker">Request a Quote</span>
+                            <h2>Send the drawing package and we will tell you quickly if it fits.</h2>
+                            <p>
+                                Email the job details directly to Brendan. If the work matches the model, you get a
+                                cleaner quoting path and a process built for dependable repeat orders.
+                            </p>
+                            <a class="button button-primary"
+                                href="mailto:brendan@lanemachineworks.com?subject=Quote%20Request%20for%20Lane%20Machine%20Works">
+                                brendan@lanemachineworks.com
+                            </a>
+                        </div>
+
+                        <aside class="quote-checklist">
+                            <span class="label">Include</span>
+                            <ul>
+                                <li>Drawing, model, or both</li>
+                                <li>Target quantity and repeat expectations</li>
+                                <li>Material callout if not 6061-T6</li>
+                                <li>Critical features or tolerance notes</li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-badge">
+                    <div class="footer-badge-card">
+                        <img src="img/vet_owned.png" alt="Veteran owned business badge">
+                    </div>
+                </div>
+                <div class="footer-bar">
+                    <p>Lane Machine Works</p>
+                    <p class="muted">Precision CNC machining. Predictable delivery. No chaos.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
