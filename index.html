@@ -7,6 +7,7 @@
     <title>Lane Machine Works | Precision CNC Machining</title>
     <meta name="description"
         content="Lane Machine Works delivers precision CNC machining for 6061 aluminum parts with stable pricing, repeatable process control, and predictable delivery.">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
@@ -125,6 +126,47 @@
             backdrop-filter: blur(16px);
             background: rgba(243, 241, 235, 0.75);
             border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+        }
+
+        .launch-banner {
+            padding: 1rem 0 1.1rem;
+            background: linear-gradient(180deg, rgba(194, 228, 255, 0.95), rgba(232, 243, 255, 0.78));
+            border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+        }
+
+        .launch-banner-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .launch-banner-copy {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .launch-banner-copy p {
+            margin: 0;
+            max-width: 74ch;
+        }
+
+        .launch-banner-note {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 0.42rem 0.78rem;
+            border-radius: 999px;
+            background: rgba(17, 17, 17, 0.9);
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .launch-banner-action {
+            align-self: center;
         }
 
         .nav {
@@ -524,6 +566,10 @@
         }
 
         @media (max-width: 980px) {
+            .launch-banner-inner {
+                grid-template-columns: 1fr;
+            }
+
             .nav {
                 flex-wrap: wrap;
                 padding: 0.8rem 0;
@@ -552,6 +598,14 @@
         @media (max-width: 640px) {
             .topbar {
                 position: static;
+            }
+
+            .launch-banner {
+                padding: 0.9rem 0 1rem;
+            }
+
+            .launch-banner-copy p {
+                font-size: 0.95rem;
             }
 
             .container {
@@ -649,6 +703,30 @@
 <body>
     <div class="page-shell">
         <header class="topbar">
+            <div class="launch-banner">
+                <div class="container launch-banner-inner">
+                    <div class="launch-banner-copy">
+                        <span class="launch-banner-note">Temporary Update</span>
+                        <p>
+                            I&rsquo;m setting up a small CNC shop in NJ focused on quick-turn aluminum parts (1-50 pcs).
+                        </p>
+                        <p>
+                            I&rsquo;m still finalizing equipment and workflow, so I&rsquo;m not quoting formally yet, but
+                            I&rsquo;m working through real parts to dial things in.
+                        </p>
+                        <p>
+                            If you have a part, even something you&rsquo;ve run before, I&rsquo;d be happy to take a look
+                            and sanity-check how I&rsquo;d approach it. <strong>If it looks like a good fit, I&rsquo;d
+                                prioritize your work once I&rsquo;m up and running.</strong>
+                        </p>
+                    </div>
+                    <a class="button button-secondary launch-banner-action"
+                        href="mailto:brendan@lanemachineworks.com?subject=Part%20Review%20for%20Lane%20Machine%20Works">
+                        Send a Part to Review
+                    </a>
+                </div>
+            </div>
+
             <div class="container nav">
                 <a class="brand" href="#top" aria-label="Lane Machine Works home">
                     <div class="brand-mark">
